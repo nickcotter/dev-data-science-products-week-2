@@ -21,7 +21,7 @@ require(leaflet)
 Let's make up some cat sighting data...
 ```{r setup-data}
 
-hopkinsSites <- c(
+catWikiPages <- c(
   "<a href='https://en.wikipedia.org/wiki/British_Shorthair'>British Shorthair</a>",
   "<a href='https://en.wikipedia.org/wiki/British_Longhair'>British Longhair</a>",
   "<a href='https://en.wikipedia.org/wiki/Chartreux'>Chartreux</a>",
@@ -40,6 +40,6 @@ cat_coords <- data.frame(lat = runif(100, min = 51.517871 -0.5, max = 51.517871 
 Generate the map...
 ```{r show-map}
 
-cat_coords %>% leaflet() %>% addTiles() %>% addMarkers(icon = catIcon, popup = hopkinsSites, clusterOptions = markerClusterOptions())
+cat_coords %>% leaflet() %>% addTiles() %>% addMarkers(icon = catIcon, popup = catWikiPages, clusterOptions = markerClusterOptions())
 
 ```
