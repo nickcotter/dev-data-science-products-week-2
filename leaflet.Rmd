@@ -1,0 +1,45 @@
+---
+title: "R Markdown and Leaflet"
+author: "Nick Cotter"
+date: "26 April 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Random cat sightings in and around London, UK.
+
+
+Required Libraries...
+```{r libraries, warning=FALSE,message=FALSE}
+require(leaflet)
+```
+
+Let's make up some cat sighting data...
+```{r setup-data}
+
+hopkinsSites <- c(
+  "<a href='https://en.wikipedia.org/wiki/British_Shorthair'>British Shorthair</a>",
+  "<a href='https://en.wikipedia.org/wiki/British_Longhair'>British Longhair</a>",
+  "<a href='https://en.wikipedia.org/wiki/Chartreux'>Chartreux</a>",
+  "<a href='https://en.wikipedia.org/wiki/Norwegian_Forest_cat'>Norwegian Forest cat</a>",
+  "<a href='https://en.wikipedia.org/wiki/Turkish_Van'>Turkish Van</a>"
+)
+
+catIcon <- makeIcon(
+  iconUrl = "https://upload.wikimedia.org/wikipedia/commons/f/f8/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Cat_%E2%80%93_Nature_%E2%80%93_simple.png"
+)
+
+cat_coords <- data.frame(lat = runif(100, min = 51.517871 -0.5, max = 51.517871 + 0.5),
+                 lng = runif(100, min = -0.303083 - 0.5, max = -0.303083 + 0.5))
+```
+
+Generate the map...
+```{r show-map}
+
+cat_coords %>% leaflet() %>% addTiles() %>% addMarkers(icon = catIcon, popup = hopkinsSites, clusterOptions = markerClusterOptions())
+
+```
